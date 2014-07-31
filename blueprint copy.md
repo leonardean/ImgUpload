@@ -108,7 +108,7 @@ function modifyBucketACL(param, context, done) {
 ```
 For more information on server code writing, managing, and executing, please click [HERE](http://documentation.kii.com/en/guides/serverextension/).
 ###5.Data sending
-Since data is sent in the form of Key-Value pairs, a typical piece of data uploaded to the bucket `wdDataRecord` should be like:
+Since data is sent in the form of Key-Value pairs, a typical piece of data uploaded to the bucket `wdDataRecord` would be like:
 ```
 {
   'username': 'demo',
@@ -157,7 +157,47 @@ public void onClick(View view) {
   }
 }
 ```
-As explained in the previous section, there is a multiple to multiple relation between users and devices. 
+As explained in the previous section, there is a multiple to multiple relationship between users and devices. Threrefore, each time a user uploads his data onto his user scope bucket, the device-user mapping needs to be maintained in an **App Scope Bucket**. Given the username, deviceID, and app admin, the server extension function is shown below:
+```javascript
+function maintainRel(user, deviceID, admin, done, log) {
+  //get app scope bucket
+  var relation = admin.bucketWithName("UserDeviceRelation");
+  //create query with clause
+  var idEq = KiiClause.equals("userName", user.getUsername());
+  var devEq = KiiClause.equals("deviceID", deviceID);
+  var clause = KiiClause.and(idEq, devEq);
+  var query = KiiQuery.queryWithClause(clause);
+
+  relation.executeQuery(query, {
+    success: function (queryPerformed, resultSet, nextQuery) {
+      //if the mapping is not found, then add it
+      if (resultSet.length == 0) {
+        var rel = relation.createObject();
+        rel.set("deviceID", deviceID);
+        rel.set("userID", user.getUUID());
+        rel.set("userName", user.getUsername());
+        rel.save({
+          success: function (obj) {
+            recordLog(obj, "save rel success", done, log);
+          },
+          failure: function (obj, errorString) {
+            recordLog(errorString, "save rel fail", done, log);
+          }
+        });
+      } else {
+        recordLog("every ok,nothing need to do", "finish", done, log);
+      }
+    },
+    failure: function (queryPerformed, anErrorString) {
+      recordLog(anErrorString, "query rel fail", done, log);
+    }
+  });
+}
+```
+In addition, we would like to do something else on this trigger. We would like our users to be able to see some analytics in dimention of time.(e.g. users can see the average temperature near him every day/week/month) So the uploaded data needs to be modified by added extra time attributes: `weekNo` and `monthNo` for [App Data Analytics](http://documentation.kii.com/en/guides/android/managing-analytics/flex-analytics/analyze-application-data/) setup. Please note that Analytics are essentially MapReduce calculations run once every 24 hours, so the analytics result can be retrieve directy without any front end calculation. It is both network and power efficient. The server extension for upload data modification is shown below:
+```javascript
+
+```
 ###6.Data Retriving
 ###7.Data Analysis
 ###8.More
