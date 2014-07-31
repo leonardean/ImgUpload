@@ -1,5 +1,4 @@
 #How Kii Cloud helps IoT products be on fire
-
 [TOC]
 ###1.Abstract
 ![concept of iot](https://raw.githubusercontent.com/leonardean/ImgUpload/master/internet-of-things-more-devices-than-people.png)
@@ -194,10 +193,67 @@ function maintainRel(user, deviceID, admin, done, log) {
   });
 }
 ```
-In addition, we would like to do something else on this trigger. We would like our users to be able to see some analytics in dimention of time.(e.g. users can see the average temperature near him every day/week/month) So the uploaded data needs to be modified by added extra time attributes: `weekNo` and `monthNo` for [App Data Analytics](http://documentation.kii.com/en/guides/android/managing-analytics/flex-analytics/analyze-application-data/) setup. Please note that Analytics are essentially MapReduce calculations run once every 24 hours, so the analytics result can be retrieve directy without any front end calculation. It is both network and power efficient. The server extension for upload data modification is shown below:
+In addition, we would like to do something else on this trigger. We would like our users to be able to see some analytics in dimention of time.(e.g. users can see the average temperature near him every day/week/month) So the uploaded data needs to be modified by adding extra time attributes: `dayNo`,`weekNo` and `monthNo` for [App Data Analytics](http://documentation.kii.com/en/guides/android/managing-analytics/flex-analytics/analyze-application-data/) setup. Please note that Analytics are essentially MapReduce calculations run periodically, so the analytics result can be retrieved directy without any front end calculation. It is both network and power efficient. The server extension for uploaded data modification is shown below:
 ```javascript
+function modifyRecord(param, context, done) {
+  //get app admin and object
+  var admin = context.getAppAdminContext();
+  var obj = KiiObject.objectWithURI(param.uri);
 
+  KiiUser.authenticateWithToken(context.getAccessToken(), {
+    success: function (theUser) {
+      obj.refresh({
+        success: function (theObj) {
+          //set dayno, weekno, monthno
+          var time = new Date(theObj.time);
+          var dayNum = Math.round(time / (1000 * 60 * 60 * 24) );
+          var weekNo = Math.round(dayNum / 7);
+          var month = time.getMonth() + time.getFullYear() * 12;
+          theObj.set("weekno", weekNo);
+          theObj.set("monthno", month);
+          theObj.set("dayno",dayNum);          
+          //set a "username" attribute for analytics
+					theObj.set("username",theUser.getUsername());
+          theObj.save({
+            success: function (theObj) {
+              //set the object to be readable by other authenticate users
+              var objACL = KiiACLEntry.entryWithSubject(new KiiAnyAuthenticatedUser(), 
+                KiiACLAction.KiiACLObjectActionRead);
+              var acl = theObject.objectACL();
+              acl.putACLEntry(objACL);
+              acl.save({
+                success: function (theACL) {
+                  var deviceID = theObj.get("deviceID");
+                  //this is where the above function is used
+                  maintainRel(theUser, deviceID, admin, done, log);
+                }, failure: function (theACL, errorString) { /*TODO*/ }});},
+            failure: function (theObj, errorString) { /*TODO*/ }});},
+        failure: function (theObject, anErrorString) { /*TODO*/ }});},
+    failure: function (theUser, error) { /*TODO*/
+    }
+  });
+}
 ```
+Finally, the server extension functions will be executed upon this **Single** Hook file:
+```
+{
+  "kiicloud://users/*/buckets/wdDataRecord":[
+    {
+      "when":"DATA_OBJECT_CREATED",
+      "what":"EXECUTE_SERVER_CODE",
+      "endpoint":"modifyRecord"
+    }
+  ],
+  "kiicloud://users": [
+    {
+      "when": "USER_CREATED",
+      "what": "EXECUTE_SERVER_CODE",
+      "endpoint": "modifyBucketACL"
+    }
+  ]
+}
+```
+Please note that only one server code file with one hook file can be active at a time, so please put the above three functions in one Js file for [deployment](http://documentation.kii.com/en/guides/serverextension/managing_servercode/#deploy).
 ###6.Data Retriving
 ###7.Data Analysis
 ###8.More
