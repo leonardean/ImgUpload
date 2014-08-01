@@ -1,11 +1,11 @@
 #How Kii Cloud helps IoT products be on fire
 [TOC]
-###1.Abstract
+###Abstract
 ![concept of iot](https://raw.githubusercontent.com/leonardean/ImgUpload/master/internet-of-things-more-devices-than-people.png)
 Trends show that the Internet of Things(IoT) has great potential to enhance people's lives in many perspectives. Though the IoT is yet to be standardized in terms of centricity and Machine to Machine(M2M) communication, its concept has been well explained by products consisting of data-transmittable swiches, sensors for smart house and wearable devices for human centric functionality. With hardware devices, cloud services play an important role that **connects** and makes the best out of collected information with variety of business logic.
 
 [Kii Cloud](http://cn.kii.com/)([English Website](http://en.kii.com/)) is a **Mobile Back-end as a Service(MBaaS)** that offers developers an easy way to build a full-stack mobile backend to their apps in minutes, with carrier-grade technology, plus analytics to help to succeed. Kii Cloud can be used on almost every mobile platform and covers the most demanded functionality for developers to **freely** tailor their back end business logic. This article shows a typical story of how Kii Cloud can be used to help an IoT device to ease its life and be more productive.
-###2.Application Scenario
+###Application Scenario
 Suppose that we have a wearable device with sensors to detect environmental status (e.g. tmperature, UV index, humidity) around its wearer. It can periodically transmit detected data via **BLE**(Bluetooth Low Energy) or **IR**(Infrared) to a receiver such as a central control or a mobile phone. Our goal is to make the device act as not only a real time environment tracker (it already seem to be), but also a data generator/provider, so that its data can be consumed to produce more **added value**. Examples of data consumption could be:
 * multi-dimentional data viewing
 * data analysis
@@ -20,9 +20,9 @@ Let's take a technical view at how Kii Cloud can be used in this application. Pl
 * [Kii Cloud SDK](http://documentation.kii.com/en/starts/cloudsdk/) provides the basic and most demanded functions for leveraging Kii Cloud. They cover almost every mobile platform: Android, iOS, Unity, Javascript, and Terminal Tools. For more advanced use of Kii Cloud, [REST](http://documentation.kii.com/en/guides/rest/) and [Server Extension](http://documentation.kii.com/en/guides/serverextension/) may need to be used. In this application, we will have a taste of these two as well.
 * In Kii Cloud, [Bucket](http://documentation.kii.com/en/starts/cloudsdk/managing-data/bucket/) works as data container and **Access Controler**. There are three types of buckets: **App Scope**, **Group Scope**, and **User Scope** with different default ACL. However, the ACL of buckets can be customized by adding specific rules.
 * When using Kii Cloud SDK, data is store in the form of [KiiObject](http://documentation.kii.com/en/starts/cloudsdk/managing-data/object-storage/). Internally, they are store as **JSON Key-Value** pairs.
-* Kii Cloud provides flexible [Analytics](http://documentation.kii.com/en/guides/android/managing-analytics/) that enables you to learn more about how your app is going on (**App Data Analytics**) and user behavior(**Event Analytics**). In addition, the analytics are also accessible from the front end app so that your users can get designated analysis as well.
+* Kii Cloud provides flexible [Flex Analytics](http://documentation.kii.com/en/guides/android/managing-analytics/) that enables you to learn more about how your app is going on (**App Data Analytics**) and user behavior(**Event Analytics**). In addition, the analytics are also accessible from the front end app so that your users can get designated analysis as well.
 
-###3.Kii SDK Initialization
+###Kii SDK Initialization
 In order to use Kii Cloud SDK features in the front end app, the SDK needs to be firstly initialized. Following demo shows the initialization in Android:
 ```java
 package com.kii.wearable.demo;
@@ -41,7 +41,7 @@ public class DemoApplication extends Application {
 }
 ```
 
-###4.User Registration
+###User Registration
 Device pairing and user registration is the first step of a user using the product. User registration and login can be quite straight forward in front end app using Kii Cloud SDK. The following demo shows the implementation in Android:
 ```java
 @Override
@@ -106,7 +106,7 @@ function modifyBucketACL(param, context, done) {
 }
 ```
 For more information on server code writing, managing, and executing, please click [HERE](http://documentation.kii.com/en/guides/serverextension/).
-###5.Data sending
+###Data sending
 Since data is sent in the form of Key-Value pairs, a typical piece of data uploaded to the bucket `wdDataRecord` would be like:
 ```
 {
@@ -156,7 +156,9 @@ public void onClick(View view) {
   }
 }
 ```
-As explained in the previous section, there is a multiple to multiple relationship between users and devices. Threrefore, each time a user uploads his data onto his user scope bucket, the device-user mapping needs to be maintained in an **App Scope Bucket**. Given the username, deviceID, and app admin, the server extension function is shown below:
+As explained in the previous section, there is a multiple to multiple relationship between users and devices. It is very straight forward to retrieve the uploaded data of a user from front end app, as the data from the same user are stored in the same User Scope Bucket. However, it would be very inefficient to retrieve data of a certain device because the data might be in any bucket; and the front end app has to loop through all the buckets to find the corresponding data. Threrefore, each time a user uploads his data onto his user scope bucket, the device-user mapping needs to be maintained in an **App Scope Bucket**, so that the front end app can easily track the certain buckets that contain the data of a device.
+
+Given the username, deviceID, and app admin, the server extension function is shown below:
 ```javascript
 function maintainRel(user, deviceID, admin, done, log) {
   //get app scope bucket
@@ -254,7 +256,39 @@ Finally, the server extension functions will be executed upon this **Single** Ho
 }
 ```
 Please note that only one server code file with one hook file can be active at a time, so please put the above three functions in one Js file for [deployment](http://documentation.kii.com/en/guides/serverextension/managing_servercode/#deploy).
-###6.Data Retriving
-###7.Data Analysis
-###8.More
+###Data Retriving
+With the help of Kii Cloud SDK, retrieving raw data from Kii Cloud server is as easy as uploading. Following is a demo showing this in Android:
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setTitle(R.string.all_my_data);
+  setContentView(R.layout.activity_all_data);
+  //create a new query, you can certainly add clause on it if you want
+  KiiQuery all_query = new KiiQuery();
+  //get the user scope bucket
+  KiiBucket bucket = KiiUser.getCurrentUser().bucket("wdDataRecord");
+  bucket.query(new KiiQueryCallBack<KiiObject>() {
+    @Override
+    public void onQueryCompleted(int token, KiiQueryResult<KiiObject> result,
+      Exception exception) {
+      //TODO
+    }
+  }, all_query);
+}
+```
+Note that this demo retrieved all the raw data from the bucket `wdDataRecord`. **KiiClause** can be added to the `KiiQuery` if you need more specific queries. For more information on complex query, please click [HERE](http://documentation.kii.com/en/guides/android/managing-data/object-storages/querying/).
+###Data Analysis
 ![kii cloud](https://raw.githubusercontent.com/leonardean/ImgUpload/master/B.png)
+Data Analytics is one of the most valuable features of Kii Cloud service. There are two types of Analytics:
+* [Basic Analytics](http://documentation.kii.com/en/guides/android/managing-analytics/basic-analytics/) with general application analytics with predefined metrics.
+* [Flex Analytics](http://documentation.kii.com/en/guides/android/managing-analytics/flex-analytics/) with flexible application analytics with customizable metrics. Flex Analytics contains:
+ * [App Data Analytics](http://documentation.kii.com/en/guides/android/managing-analytics/flex-analytics/analyze-application-data/) that analyse object data created by your application. You can use any stored key-values for defining your custom metrics.
+ * [Event Data Analytics](http://documentation.kii.com/en/guides/android/managing-analytics/flex-analytics/analyze-event-data/) that analyse data thrown by your application besides application data. Kii Analytics provides you a feature to throw such event data with arbitrary key-values.
+
+In this application, we are going to use App Data Analytics to get the average temperature of users by username/day/week/month. First of all, there are several steps to setup an App Data Analytics in the **Developer Portal**:
+1. Sign in to the Developer Portal and go to **Analytics** section page
+2. Switch to **Config** tab and Click on button **Add** to create a new aggregation rule
+
+
+###More
