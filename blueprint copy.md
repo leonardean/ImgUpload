@@ -288,7 +288,50 @@ Data Analytics is one of the most valuable features of Kii Cloud service. There 
 
 In this application, we are going to use App Data Analytics to get the average temperature of users by username/day/week/month. First of all, there are several steps to setup an App Data Analytics in the **Developer Portal**:
 1. Sign in to the Developer Portal and go to **Analytics** section page
-2. Switch to **Config** tab and Click on button **Add** to create a new aggregation rule
+2. Switch to **Config** tab and Click on button **Add** to create a new aggregation rule.
+3. Select **App Data** and click on **Select a conversion rule**.
+4. Since you do not have a conversion rule, you will neet to create one first. Fill in the space and create a conversation rule as below:
+![conversation rule](https://raw.githubusercontent.com/leonardean/ImgUpload/master/conversation%20create.png)
+5. save the conversation rule and set the Analytics as below:
+![analytics set](https://raw.githubusercontent.com/leonardean/ImgUpload/master/analytics%20set.png)
+Save and Activate the Aggregation rule, it will be ready to use. You will get an **ID** for the Aggregation Rule after activation. The ID will be used in the front end app to retrieve analytics data.
 
+Please note that analytics are calculated once every 24 hours on Kii Cloud. Therefore, it is likely that you do not have an instant view of the metrics after you just created an Aggregation Rule. After some time, you will be able to see the corresponding metrics as below:
+
+![analytics view](https://raw.githubusercontent.com/leonardean/ImgUpload/master/analytics%20view.png)
+
+The metrics page contains two charts and one table. The line graph on the top shows the temperature values of different users by day. The bar chart at the bottom right gives a more direct view of the value comparison between the three users. Dimention can be switched by clicking on any of the four pre-set fields so that the chart can show temperature values of different devices/weeks/months.
+
+In addition to flexible dimention switch, you can also add filters for more detailed information. In this case, the temperature values are filtered by deviceID `device1`. Therefore, only users who have used the device are shown on the graph. The table shows the detailed temperature values of each username/deviceID with comparison to total average. Clicking on any of the record in the table can toggle on/off the corresponding data display in the two charts.
+
+The metrics on the Developer Portal is only for yourself as the developer of the app. If you would like your user to see the analytics data in the front end app, the corresponding [REST API](http://documentation.kii.com/rest/#analytics_management-retrieve_flex_analytics_results)(Tip: please do click on the API link on the doc page for detail expansion) will be needed. The following demo shows how to do it in Javascript:
+```javascript
+function lala(){
+  var ajaxData = {
+    type: "GET",
+    url: "https://api-cn2.kii.com/api/apps/" + Kii.getAppID()+ "/analytics/120/data?" +
+      "group=username&" +
+      "filter001.name=deviceID&" +
+      "filter001.value=device1",
+    dataType: "json",
+    headers: {"x-kii-appid": Kii.getAppID(), "x-kii-appkey": Kii.getAppKey()},
+    contentType: "application/json",
+    complete: function(res, status) {
+      console.log("Completed Request[" + res.status + "]");
+      console.log(res.responseText);
+    }
+  };
+  $.ajax(ajaxData);
+}
+```
+The above demo retrieves the analytics data with:
+* **Aggregation Rule ID** of `120`.
+* **Filter name** of `deviceID`.
+* **Filter value** of `device1`.
+
+Please note that multiple filters can be added by appending `filterN.name` and `filterN.value` (`N` is an integer) to the query string. The retrieved data can be used in whatever ways in the front end app to satisfy your users.
 
 ###More
+
+This article demonstrated how Kii Cloud can be used as a back end service in typicle IoT case. With **Kii SDK** and **Developer Portal**, developers can easily build and manage a back end service for their front end apps without writing a single line for back end server except Hooks and Server extension functions. The stability, reliability and scalibility of Kii Cloud service guarantee that app developers can focus on the user interface and user experience of their front end apps
+

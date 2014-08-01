@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>blueprint copy.html</title>
+  <meta name="generator" content="Haroopad 0.12.1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>div.oembedall-githubrepos{border:1px solid #DDD;border-radius:4px;list-style-type:none;margin:0 0 10px;padding:8px 10px 0;font:13.34px/1.4 helvetica,arial,freesans,clean,sans-serif;width:452px;background-color:#fff}div.oembedall-githubrepos .oembedall-body{background:-moz-linear-gradient(center top,#FAFAFA,#EFEFEF) repeat scroll 0 0 transparent;background:-webkit-gradient(linear,left top,left bottom,from(#FAFAFA),to(#EFEFEF));border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-top:1px solid #EEE;margin-left:-10px;margin-top:8px;padding:5px 10px;width:100%}div.oembedall-githubrepos h3{font-size:14px;margin:0;padding-left:18px;white-space:nowrap}div.oembedall-githubrepos p.oembedall-description{color:#444;font-size:12px;margin:0 0 3px}div.oembedall-githubrepos p.oembedall-updated-at{color:#888;font-size:11px;margin:0}div.oembedall-githubrepos ul.oembedall-repo-stats{border:medium none;float:right;font-size:11px;font-weight:700;padding-left:15px;position:relative;z-index:5;margin:0}div.oembedall-githubrepos ul.oembedall-repo-stats li{border:medium none;color:#666;display:inline-block;list-style-type:none;margin:0!important}div.oembedall-githubrepos ul.oembedall-repo-stats li a{background-color:transparent;border:medium none;color:#666!important;background-position:5px -2px;background-repeat:no-repeat;border-left:1px solid #DDD;display:inline-block;height:21px;line-height:21px;padding:0 5px 0 23px}div.oembedall-githubrepos ul.oembedall-repo-stats li:first-child a{border-left:medium none;margin-right:-3px}div.oembedall-githubrepos ul.oembedall-repo-stats li a:hover{background:none no-repeat scroll 5px -27px #4183C4;color:#FFF!important;text-decoration:none}div.oembedall-githubrepos ul.oembedall-repo-stats li:first-child a:hover{border-bottom-left-radius:3px;border-top-left-radius:3px}ul.oembedall-repo-stats li:last-child a:hover{border-bottom-right-radius:3px;border-top-right-radius:3px}span.oembedall-closehide{background-color:#aaa;border-radius:2px;cursor:pointer;margin-right:3px}div.oembedall-container{margin-top:5px;text-align:left}.oembedall-ljuser{font-weight:700}.oembedall-ljuser img{vertical-align:bottom;border:0;padding-right:1px}.oembedall-stoqembed{border-bottom:1px dotted #999;float:left;overflow:hidden;width:730px;line-height:1;background:none repeat scroll 0 0 #FFF;color:#000;font-family:Arial,Liberation Sans,DejaVu Sans,sans-serif;font-size:80%;text-align:left;margin:0;padding:0}.oembedall-stoqembed a{color:#07C;text-decoration:none;margin:0;padding:0}.oembedall-stoqembed a:hover{text-decoration:underline}.oembedall-stoqembed a:visited{color:#4A6B82}.oembedall-stoqembed h3{font-family:Trebuchet MS,Liberation Sans,DejaVu Sans,sans-serif;font-size:130%;font-weight:700;margin:0;padding:0}.oembedall-stoqembed .oembedall-reputation-score{color:#444;font-size:120%;font-weight:700;margin-right:2px}.oembedall-stoqembed .oembedall-user-info{height:35px;width:185px}.oembedall-stoqembed .oembedall-user-info .oembedall-user-gravatar32{float:left;height:32px;width:32px}.oembedall-stoqembed .oembedall-user-info .oembedall-user-details{float:left;margin-left:5px;overflow:hidden;white-space:nowrap;width:145px}.oembedall-stoqembed .oembedall-question-hyperlink{font-weight:700}.oembedall-stoqembed .oembedall-stats{background:none repeat scroll 0 0 #EEE;margin:0 0 0 7px;padding:4px 7px 6px;width:58px}.oembedall-stoqembed .oembedall-statscontainer{float:left;margin-right:8px;width:86px}.oembedall-stoqembed .oembedall-votes{color:#555;padding:0 0 7px;text-align:center}.oembedall-stoqembed .oembedall-vote-count-post{font-size:240%;color:#808185;display:block;font-weight:700}.oembedall-stoqembed .oembedall-views{color:#999;padding-top:4px;text-align:center}.oembedall-stoqembed .oembedall-status{margin-top:-3px;padding:4px 0;text-align:center;background:none repeat scroll 0 0 #75845C;color:#FFF}.oembedall-stoqembed .oembedall-status strong{color:#FFF;display:block;font-size:140%}.oembedall-stoqembed .oembedall-summary{float:left;width:635px}.oembedall-stoqembed .oembedall-excerpt{line-height:1.2;margin:0;padding:0 0 5px}.oembedall-stoqembed .oembedall-tags{float:left;line-height:18px}.oembedall-stoqembed .oembedall-tags a:hover{text-decoration:none}.oembedall-stoqembed .oembedall-post-tag{background-color:#E0EAF1;border-bottom:1px solid #3E6D8E;border-right:1px solid #7F9FB6;color:#3E6D8E;font-size:90%;line-height:2.4;margin:2px 2px 2px 0;padding:3px 4px;text-decoration:none;white-space:nowrap}.oembedall-stoqembed .oembedall-post-tag:hover{background-color:#3E6D8E;border-bottom:1px solid #37607D;border-right:1px solid #37607D;color:#E0EAF1}.oembedall-stoqembed .oembedall-fr{float:right}.oembedall-stoqembed .oembedall-statsarrow{background-image:url(http://cdn.sstatic.net/stackoverflow/img/sprites.png?v=3);background-repeat:no-repeat;overflow:hidden;background-position:0 -435px;float:right;height:13px;margin-top:12px;width:7px}.oembedall-facebook1{border:#1A3C6C solid 1px;padding:0;font:13.34px/1.4 verdana;width:500px}.oembedall-facebook2{background-color:#627add}.oembedall-facebook2 a{color:#e8e8e8;text-decoration:none}.oembedall-facebookBody{background-color:#fff;vertical-align:top;padding:5px}.oembedall-facebookBody .contents{display:inline-block;width:100%}.oembedall-facebookBody div img{float:left;margin-right:5px}div.oembedall-lanyard{-webkit-box-shadow:none;-webkit-transition-delay:0s;-webkit-transition-duration:.4000000059604645s;-webkit-transition-property:width;-webkit-transition-timing-function:cubic-bezier(0.42,0,.58,1);background-attachment:scroll;background-clip:border-box;background-color:transparent;background-image:none;background-origin:padding-box;border-bottom-width:0;border-left-width:0;border-right-width:0;border-top-width:0;box-shadow:none;color:#112644;display:block;float:left;font-family:'Trebuchet MS',Trebuchet,sans-serif;font-size:16px;height:253px;line-height:19px;margin-bottom:0;margin-left:0;margin-right:0;margin-top:0;max-width:none;min-height:0;outline-color:#112644;outline-style:none;outline-width:0;overflow-x:visible;overflow-y:visible;padding-bottom:0;padding-left:0;padding-right:0;padding-top:0;position:relative;text-align:left;vertical-align:baseline;width:804px}div.oembedall-lanyard .tagline{font-size:1.5em}div.oembedall-lanyard .wrapper{overflow:hidden;clear:both}div.oembedall-lanyard .split{float:left;display:inline}div.oembedall-lanyard .prominent-place .flag:active,div.oembedall-lanyard .prominent-place .flag:focus,div.oembedall-lanyard .prominent-place .flag:hover,div.oembedall-lanyard .prominent-place .flag:link,div.oembedall-lanyard .prominent-place .flag:visited{float:left;display:block;width:48px;height:48px;position:relative;top:-5px;margin-right:10px}div.oembedall-lanyard .place-context{font-size:.889em}div.oembedall-lanyard .prominent-place .sub-place{display:block}div.oembedall-lanyard .prominent-place{font-size:1.125em;line-height:1.1em;font-weight:400}div.oembedall-lanyard .main-date{color:#8CB4E0;font-weight:700;line-height:1.1}div.oembedall-lanyard .first{width:48.57%;margin:0 0 0 2.857%}html{height:100%}body{margin:0!important;padding:5px 20px 26px!important;background-color:#fff;font-family:"Lucida Grande","Segoe UI","Apple SD Gothic Neo","Malgun Gothic","Lucida Sans Unicode",Helvetica,Arial,sans-serif;font-size:.9em;overflow-x:hidden;overflow-y:auto}br,h1,h2,h3,h4,h5,h6{clear:both}hr.page{background:transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;border:0 none;color:#ccc;height:3px;padding:0}hr.underscore{border:0 none!important;height:30px;padding:0;-webkit-margin-before:0;-webkit-margin-after:0}body >:first-child{margin-top:0!important}img.plugin{box-shadow:0 1px 3px rgba(0,0,0,.1);border-radius:3px}iframe{border:0}figure{-webkit-margin-before:0;-webkit-margin-after:0;-webkit-margin-start:0;-webkit-margin-end:0}kbd{border:1px solid #aaa;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;-moz-box-shadow:1px 2px 2px #ddd;-webkit-box-shadow:1px 2px 2px #ddd;box-shadow:1px 2px 2px #ddd;background-color:#f9f9f9;background-image:-moz-linear-gradient(top,#eee,#f9f9f9,#eee);background-image:-o-linear-gradient(top,#eee,#f9f9f9,#eee);background-image:-webkit-linear-gradient(top,#eee,#f9f9f9,#eee);background-image:linear-gradient(top,#eee,#f9f9f9,#eee);padding:1px 3px;font-family:inherit;font-size:.85em}.oembeded .oembed_photo{display:inline-block}img[data-echo]{margin:25px 0;width:100px;height:100px;background:#fff url(../img/ajax.gif) no-repeat center center}.spinner{display:inline-block;width:10px;height:10px;margin-bottom:-.1em;border:2px solid rgba(0,0,0,.5);border-top-color:transparent;border-radius:100%;-webkit-animation:spin 1s infinite linear;animation:spin 1s infinite linear}.spinner:after{content:'';display:block;width:0;height:0;position:absolute;top:-6px;left:0;border:4px solid transparent;border-bottom-color:rgba(0,0,0,.5);-webkit-transform:rotate(45deg);transform:rotate(45deg)}@-webkit-keyframes spin{to{-webkit-transform:rotate(360deg)}}@keyframes spin{to{transform:rotate(360deg)}}p.toc{margin:0!important}p.toc ul{padding-left:10px}p.toc>ul{padding:10px;margin:0 10px;display:inline-block;border:1px solid #ededed;border-radius:5px}p.toc li,p.toc ul{list-style-type:none}p.toc li{width:100%;padding:0;overflow:hidden}p.toc li a::after{content:"."}p.toc li a:before{content:"• "}p.toc h5{text-transform:uppercase}p.toc .title{float:left;padding-right:3px}p.toc .number{margin:0;float:right;padding-left:3px;background:#fff;display:none}.markdown{padding:20px}.markdown a{text-decoration:none;vertical-align:baseline}.markdown a:hover{text-decoration:underline}.markdown h1{font-size:2.2em;font-weight:700;margin:1.5em 0 1em}.markdown h2{font-size:1.8em;font-weight:700;margin:1.275em 0 .85em}.markdown h3{font-size:1.6em;font-weight:700;margin:1.125em 0 .75em}.markdown h4{font-size:1.4em;font-weight:700;margin:.99em 0 .66em}.markdown h5{font-size:1.2em;font-weight:700;margin:.855em 0 .57em}.markdown h6{font-size:1em;font-weight:700;margin:.75em 0 .5em}.markdown h1+p,.markdown h1:first-child,.markdown h2+p,.markdown h2:first-child,.markdown h3+p,.markdown h3:first-child,.markdown h4+p,.markdown h4:first-child,.markdown h5+p,.markdown h5:first-child,.markdown h6+p,.markdown h6:first-child{margin-top:0}.markdown hr{border:1px solid #ccc}.markdown p{margin:1em 0;word-wrap:break-word}.markdown ol{list-style-type:decimal}.markdown li{display:list-item;line-height:1.4em}.markdown blockquote{margin:1em 20px}.markdown blockquote>:first-child{margin-top:0}.markdown blockquote>:last-child{margin-bottom:0}.markdown blockquote cite:before{content:'\2014 \00A0'}.markdown .code{border-radius:3px;word-break:break-all;word-wrap:break-word}.markdown pre{border-radius:3px;word-break:break-all;word-wrap:break-word;overflow:auto}.markdown pre code{display:block}.markdown pre>code{border:1px solid #ccc;white-space:pre;padding:.5em;margin:0}.markdown code{border-radius:3px;word-break:break-all;word-wrap:break-word;border:1px solid #ccc;padding:0 5px;margin:0 2px}.markdown img{max-width:100%}.markdown table{padding:0;border-collapse:collapse;border-spacing:0}.markdown table tr td,.markdown table tr th{border:1px solid #ccc;margin:0;padding:6px 13px}.markdown table tr th{font-weight:700}.markdown table tr th>:first-child{margin-top:0}.markdown table tr th>:last-child{margin-bottom:0}.markdown table tr td>:first-child{margin-top:0}.markdown table tr td>:last-child{margin-bottom:0}.markdown em.underline{font-style:normal;text-decoration:underline}.markdown strong.highlight{color:#000;padding:0 5px;background-color:#fdffb6;-webkit-box-shadow:#fdffb6 0 0 5px;-moz-box-shadow:#fdffb6 0 0 5px;box-shadow:#fdffb6 0 0 5px}.github{padding:20px;color:#000;font-size:15px;font-family:"Lucida Grande","Lucida Sans Unicode","Lucida Sans",AppleSDGothicNeo-Medium,'Segoe UI','Malgun Gothic',Verdana,Tahoma,sans-serif;background:#fff;-webkit-font-smoothing:antialiased}.github a{color:#3269a0}.github a:hover{color:#4183c4}.github h2{border-bottom:1px solid #e6e6e6;line-height:1.7em}.github h6{color:#777}.github hr{border:1px solid #e6e6e6}.github pre>code{font-size:.9em;font-family:Consolas,Inconsolata,Courier,monospace}.github blockquote{border-left:4px solid #e6e6e6;padding:0 15px;font-style:italic}.github table{background-color:#fafafa}.github table tr td,.github table tr th{border:1px solid #e6e6e6}.github table tr:nth-child(2n){background-color:#f2f2f2}.hljs{display:block;overflow-x:auto;padding:.5em;background:#fdf6e3;color:#657b83;-webkit-text-size-adjust:none}.diff .hljs-header,.hljs-comment,.hljs-doctype,.hljs-javadoc,.hljs-pi,.hljs-template_comment,.lisp .hljs-string{color:#93a1a1}.css .hljs-tag,.hljs-addition,.hljs-keyword,.hljs-request,.hljs-status,.hljs-winutils,.method,.nginx .hljs-title{color:#859900}.hljs-command,.hljs-hexcolor,.hljs-link_url,.hljs-number,.hljs-phpdoc,.hljs-regexp,.hljs-rules .hljs-value,.hljs-string,.hljs-tag .hljs-value,.tex .hljs-formula{color:#2aa198}.css .hljs-function,.hljs-built_in,.hljs-chunk,.hljs-decorator,.hljs-id,.hljs-identifier,.hljs-localvars,.hljs-title,.vhdl .hljs-literal{color:#268bd2}.hljs-attribute,.hljs-class .hljs-title,.hljs-constant,.hljs-link_reference,.hljs-parent,.hljs-type,.hljs-variable,.lisp .hljs-body,.smalltalk .hljs-number{color:#b58900}.clojure .hljs-title,.css .hljs-pseudo,.diff .hljs-change,.hljs-attr_selector,.hljs-cdata,.hljs-header,.hljs-pragma,.hljs-preprocessor,.hljs-preprocessor .hljs-keyword,.hljs-shebang,.hljs-special,.hljs-subst,.hljs-symbol,.hljs-symbol .hljs-string{color:#cb4b16}.hljs-deletion,.hljs-important{color:#dc322f}.hljs-link_label{color:#6c71c4}.tex .hljs-formula{background:#eee8d5}footer{position:fixed;font-size:.8em;text-align:right;bottom:0;margin-left:-25px;height:20px;width:100%}</style>
+</head>
+<body class="markdown github">
+
+  <h1 id="how-kii-cloud-helps-iot-products-be-on-fire"><a name="how-kii-cloud-helps-iot-products-be-on-fire" href="#how-kii-cloud-helps-iot-products-be-on-fire"></a>How Kii Cloud helps IoT products be on fire</h1><p class="toc" style="undefined"></p><ul>
+<li><ul>
+<li><ul>
+<li><span class="title">
+<a href="#abstract" title="Abstract">Abstract</a>
+</span>
+<!--span class="number">
+0
+</span-->
+</li>
+<li><span class="title">
+<a href="#application-scenario" title="Application Scenario">Application Scenario</a>
+</span>
+<!--span class="number">
+1
+</span-->
+</li>
+<li><span class="title">
+<a href="#kii-sdk-initialization" title="Kii SDK Initialization">Kii SDK Initialization</a>
+</span>
+<!--span class="number">
+2
+</span-->
+</li>
+<li><span class="title">
+<a href="#user-registration" title="User Registration">User Registration</a>
+</span>
+<!--span class="number">
+3
+</span-->
+</li>
+<li><span class="title">
+<a href="#data-sending" title="Data sending">Data sending</a>
+</span>
+<!--span class="number">
+4
+</span-->
+</li>
+<li><span class="title">
+<a href="#data-retriving" title="Data Retriving">Data Retriving</a>
+</span>
+<!--span class="number">
+5
+</span-->
+</li>
+<li><span class="title">
+<a href="#data-analysis" title="Data Analysis">Data Analysis</a>
+</span>
+<!--span class="number">
+6
+</span-->
+</li>
+<li><span class="title">
+<a href="#more" title="More">More</a>
+</span>
+<!--span class="number">
+7
+</span-->
+</li>
+</ul>
+</li>
+</ul>
+</li>
+
+</ul>
+<p></p><h3 id="abstract"><a name="abstract" href="#abstract"></a>Abstract</h3><p><img src="https://raw.githubusercontent.com/leonardean/ImgUpload/master/internet-of-things-more-devices-than-people.png" alt="concept of iot"><br>Trends show that the Internet of Things(IoT) has great potential to enhance people’s lives in many perspectives. Though the IoT is yet to be standardized in terms of centricity and Machine to Machine(M2M) communication, its concept has been well explained by products consisting of data-transmittable swiches, sensors for smart house and wearable devices for human centric functionality. With hardware devices, cloud services play an important role that <strong>connects</strong> and makes the best out of collected information with variety of business logic.</p><p><a href="http://cn.kii.com/">Kii Cloud</a>(<a href="http://en.kii.com/">English Website</a>) is a <strong>Mobile Back-end as a Service(MBaaS)</strong> that offers developers an easy way to build a full-stack mobile backend to their apps in minutes, with carrier-grade technology, plus analytics to help to succeed. Kii Cloud can be used on almost every mobile platform and covers the most demanded functionality for developers to <strong>freely</strong> tailor their back end business logic. This article shows a typical story of how Kii Cloud can be used to help an IoT device to ease its life and be more productive.</p><h3 id="application-scenario"><a name="application-scenario" href="#application-scenario"></a>Application Scenario</h3><p>Suppose that we have a wearable device with sensors to detect environmental status (e.g. tmperature, UV index, humidity) around its wearer. It can periodically transmit detected data via <strong>BLE</strong>(Bluetooth Low Energy) or <strong>IR</strong>(Infrared) to a receiver such as a central control or a mobile phone. Our goal is to make the device act as not only a real time environment tracker (it already seem to be), but also a data generator/provider, so that its data can be consumed to produce more <strong>added value</strong>. Examples of data consumption could be:</p><ul>
+<li>multi-dimentional data viewing</li>
+<li>data analysis</li>
+<li>get social and share</li>
+</ul><p>The goal can be acheived with the help of Kii Cloud as a back-end cloud service. As the wearable device only supports BLE and IR due to energy efficiency, a smart phone which is normally not far from the user can be used as a middleware for data transmission. The whole scenario of the IoT application can be sensibly shown below.</p><p><img src="https://raw.githubusercontent.com/leonardean/ImgUpload/master/device%20to%20cloud.png" alt="scenario"></p><p>Let’s take a technical view at how Kii Cloud can be used in this application. Please have a look at some involved terminologies of  Kii Cloud if you are new to Kii Cloud. (You do not need a thorough understanding of these at this moment as they will be explained in later contents)</p><ul>
+<li>It is very easy to add a Kii Cloud back end service for you app. Register and log in the <a href="https://developer.kii.com/?locale=en">Developer Portal</a>, and then click on <strong>Create App</strong> to start a new app back end service. During development, this is probably where you spend most of your time besides front end app programming. Find your <strong>access keys</strong> and keep in mind that they are important and need to be kept safely.</li>
+<li><a href="http://documentation.kii.com/en/starts/cloudsdk/">Kii Cloud SDK</a> provides the basic and most demanded functions for leveraging Kii Cloud. They cover almost every mobile platform: Android, iOS, Unity, Javascript, and Terminal Tools. For more advanced use of Kii Cloud, <a href="http://documentation.kii.com/en/guides/rest/">REST</a> and <a href="http://documentation.kii.com/en/guides/serverextension/">Server Extension</a> may need to be used. In this application, we will have a taste of these two as well.</li>
+<li>In Kii Cloud, <a href="http://documentation.kii.com/en/starts/cloudsdk/managing-data/bucket/">Bucket</a> works as data container and <strong>Access Controler</strong>. There are three types of buckets: <strong>App Scope</strong>, <strong>Group Scope</strong>, and <strong>User Scope</strong> with different default ACL. However, the ACL of buckets can be customized by adding specific rules.</li>
+<li>When using Kii Cloud SDK, data is store in the form of <a href="http://documentation.kii.com/en/starts/cloudsdk/managing-data/object-storage/">KiiObject</a>. Internally, they are store as <strong>JSON Key-Value</strong> pairs.</li>
+<li>Kii Cloud provides flexible <a href="http://documentation.kii.com/en/guides/android/managing-analytics/">Flex Analytics</a> that enables you to learn more about how your app is going on (<strong>App Data Analytics</strong>) and user behavior(<strong>Event Analytics</strong>). In addition, the analytics are also accessible from the front end app so that your users can get designated analysis as well.</li>
+</ul><h3 id="kii-sdk-initialization"><a name="kii-sdk-initialization" href="#kii-sdk-initialization"></a>Kii SDK Initialization</h3><p>In order to use Kii Cloud SDK features in the front end app, the SDK needs to be firstly initialized. Following demo shows the initialization in Android:</p><pre><code class="java hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;package com.kii.wearable.demo;
+
+import android.app.Application;
+import com.kii.cloud.analytics.KiiAnalytics;
+import com.kii.cloud.storage.Kii;
+
+public class DemoApplication extends Application {
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    Kii.initialize(Constants.APP_ID, Constants.APP_KEY, Kii.Site.CN);
+    KiiAnalytics.initialize(this, Constants.APP_ID, Constants.APP_KEY, KiiAnalytics.Site.CN);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-keyword">package</span> com.kii.wearable.demo;
+
+<span class="hljs-keyword">import</span> android.app.Application;
+<span class="hljs-keyword">import</span> com.kii.cloud.analytics.KiiAnalytics;
+<span class="hljs-keyword">import</span> com.kii.cloud.storage.Kii;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoApplication</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Application</span> </span>{
+  <span class="hljs-annotation">@Override</span>
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span>() {
+    <span class="hljs-keyword">super</span>.onCreate();
+    Kii.initialize(Constants.APP_ID, Constants.APP_KEY, Kii.Site.CN);
+    KiiAnalytics.initialize(<span class="hljs-keyword">this</span>, Constants.APP_ID, Constants.APP_KEY, KiiAnalytics.Site.CN);
+  }
+}
+</code></pre><h3 id="user-registration"><a name="user-registration" href="#user-registration"></a>User Registration</h3><p>Device pairing and user registration is the first step of a user using the product. User registration and login can be quite straight forward in front end app using Kii Cloud SDK. The following demo shows the implementation in Android:</p><pre><code class="java hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;@Override
+public void onClick(View view) {
+  switch (view.getId()) {
+    case R.id.btn_login:
+      KiiUser.logIn(callback, usernameEdit.getText().toString(),
+        passwordEdit.getText().toString());
+      showProgress(R.string.logging_in);
+      break;
+    case R.id.btn_register:
+      KiiUser user = KiiUser.builderWithName(usernameEdit.getText().toString()).build();
+      user.register(callback, passwordEdit.getText().toString());
+      showProgress(R.string.registering);
+      break;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-annotation">@Override</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span>(View view) {
+  <span class="hljs-keyword">switch</span> (view.getId()) {
+    <span class="hljs-keyword">case</span> R.id.btn_login:
+      KiiUser.logIn(callback, usernameEdit.getText().toString(),
+        passwordEdit.getText().toString());
+      showProgress(R.string.logging_in);
+      <span class="hljs-keyword">break</span>;
+    <span class="hljs-keyword">case</span> R.id.btn_register:
+      KiiUser user = KiiUser.builderWithName(usernameEdit.getText().toString()).build();
+      user.register(callback, passwordEdit.getText().toString());
+      showProgress(R.string.registering);
+      <span class="hljs-keyword">break</span>;
+  }
+}
+</code></pre><p>In <code>callback</code> function, user <strong>Access Token</strong> can be locally stored and used for faster login next time. For more information on auto access token login, please click <a href="http://documentation.kii.com/en/starts/cloudsdk/managing-users/accesstoken/">HERE</a>.</p><p>Practically, one device might be shared to be used by multiple users (apps). Also, one app can map to multiple wearable devices. In order to make sure that correct data can be retrieved by user and by device, a server extension function that modifies the ACL of each newly registrated user’s <strong>User Scope Bucket</strong> used for data storage needs to be executed when a user is created. A <a href="http://documentation.kii.com/en/guides/serverextension/managing_servercode/#serverhook">Hook</a> for <strong>Server Triggered Execution</strong> is therefore used.</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;{
+  &quot;kiicloud://users&quot;: [
+    {
+      &quot;when&quot;: &quot;USER_CREATED&quot;,
+      &quot;what&quot;: &quot;EXECUTE_SERVER_CODE&quot;,
+      &quot;endpoint&quot;: &quot;modifyBucketACL&quot;
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;">{
+  "kiicloud://users": [
+    {
+      "when": "USER_CREATED",
+      "what": "EXECUTE_SERVER_CODE",
+      "endpoint": "modifyBucketACL"
+    }
+  ]
+}
+</code></pre><p>Please note that in this hook file:</p><ul>
+<li><code>"kiicloud://users"</code> is used when the hook listens for a trigger that occurs on any users.</li>
+<li><code>"USER_CREATED"</code> specifies when the triggers fires.</li>
+<li><code>"modifyBucketACL"</code> is the name of the function to be executed.</li>
+</ul><pre><code class="javascript hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;javascript&quot;&gt;function modifyBucketACL(param, context, done) {
+  //Get the current user and its bucket named &quot;wdDataRecord&quot;
+  var userID = param.userID;
+  var admin = context.getAppAdminContext();
+  var theUser = admin.userWithID(userID);
+  var bucket = theUser.bucketWithName(&quot;wdDataRecord&quot;);
+  var log = admin.bucketWithName(&quot;log&quot;);
+
+  //Create a custom ACL rule
+  var bucketACL = KiiACLEntry.entryWithSubject(new KiiAnyAuthenticatedUser(),
+    KiiACLAction.KiiACLBucketActionQueryObjects);
+
+  // Get the ACL handle and put the rule in the handle
+  var acl = bucket.acl();
+  acl.putACLEntry(bucketACL);
+  acl.save({
+    success: function (theACL) {
+      recordLog(theACL, &quot;set acl success&quot;, done, log);
+    },
+    failure: function (theACL, errorString) {
+      recordLog(errorString, &quot;set acl fail&quot;, done, log);
+    }
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">modifyBucketACL</span><span class="hljs-params">(param, context, done)</span> </span>{
+  <span class="hljs-comment">//Get the current user and its bucket named "wdDataRecord"</span>
+  <span class="hljs-keyword">var</span> userID = param.userID;
+  <span class="hljs-keyword">var</span> admin = context.getAppAdminContext();
+  <span class="hljs-keyword">var</span> theUser = admin.userWithID(userID);
+  <span class="hljs-keyword">var</span> bucket = theUser.bucketWithName(<span class="hljs-string">"wdDataRecord"</span>);
+  <span class="hljs-keyword">var</span> log = admin.bucketWithName(<span class="hljs-string">"log"</span>);
+
+  <span class="hljs-comment">//Create a custom ACL rule</span>
+  <span class="hljs-keyword">var</span> bucketACL = KiiACLEntry.entryWithSubject(<span class="hljs-keyword">new</span> KiiAnyAuthenticatedUser(),
+    KiiACLAction.KiiACLBucketActionQueryObjects);
+
+  <span class="hljs-comment">// Get the ACL handle and put the rule in the handle</span>
+  <span class="hljs-keyword">var</span> acl = bucket.acl();
+  acl.putACLEntry(bucketACL);
+  acl.save({
+    success: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(theACL)</span> </span>{
+      recordLog(theACL, <span class="hljs-string">"set acl success"</span>, done, log);
+    },
+    failure: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(theACL, errorString)</span> </span>{
+      recordLog(errorString, <span class="hljs-string">"set acl fail"</span>, done, log);
+    }
+  });
+}
+</code></pre><p>For more information on server code writing, managing, and executing, please click <a href="http://documentation.kii.com/en/guides/serverextension/">HERE</a>.</p><h3 id="data-sending"><a name="data-sending" href="#data-sending"></a>Data sending</h3><p>Since data is sent in the form of Key-Value pairs, a typical piece of data uploaded to the bucket <code>wdDataRecord</code> would be like:</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;{
+  'username': 'demo',
+  'deviceID': 'device0',
+  'temperature': 30,
+  'humidity': 40,
+  'UV': 60,
+  'time': 1398782607
+}
+&lt;/code&gt;&lt;/pre&gt;">{
+  'username': 'demo',
+  'deviceID': 'device0',
+  'temperature': 30,
+  'humidity': 40,
+  'UV': 60,
+  'time': 1398782607
+}
+</code></pre><p>The following demo shows how to upload such a piece of data in Android.</p><pre><code class="java hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;@Override
+public void onClick(View view) {
+  switch (view.getId()) {
+    case R.id.save:
+      KiiBucket bucket = KiiUser.getCurrentUser().bucket(&quot;wdDataRecord&quot;);
+      KiiObject data = bucket.object();
+      try {
+        data.set(&quot;humidity&quot;, Double.parseDouble(humidityEdit.getText().toString()));
+        data.set(&quot;temperature&quot;, Double.parseDouble(temperatureEdit.getText().toString()));
+        data.set(&quot;uv&quot;, Double.parseDouble(uvEdit.getText().toString()));
+        data.set(&quot;deviceID&quot;, deviceEdit.getText().toString());
+        data.set(&quot;time&quot;, System.currentTimeMillis());
+        KiiACL dataACL = data.acl();
+        dataACL.putACLEntry(new KiiACLEntry(KiiAnyAuthenticatedUser.create(),
+          KiiACL.ObjectAction.READ_EXISTING_OBJECT, true));
+        dataACL.save(new KiiACLCallBack(){
+          @Override
+          public void onSaveCompleted(int token, KiiACL acl, Exception exception) {
+            //TODO
+          }
+        });
+        data.save(new KiiObjectCallBack() {
+          @Override
+          public void onSaveCompleted(int token, KiiObject object,
+            Exception exception) {
+            //TODO
+          }
+        });
+      } 
+      catch (Exception e) {
+        //TODO    
+      }
+      break;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-annotation">@Override</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onClick</span>(View view) {
+  <span class="hljs-keyword">switch</span> (view.getId()) {
+    <span class="hljs-keyword">case</span> R.id.save:
+      KiiBucket bucket = KiiUser.getCurrentUser().bucket(<span class="hljs-string">"wdDataRecord"</span>);
+      KiiObject data = bucket.object();
+      <span class="hljs-keyword">try</span> {
+        data.set(<span class="hljs-string">"humidity"</span>, Double.parseDouble(humidityEdit.getText().toString()));
+        data.set(<span class="hljs-string">"temperature"</span>, Double.parseDouble(temperatureEdit.getText().toString()));
+        data.set(<span class="hljs-string">"uv"</span>, Double.parseDouble(uvEdit.getText().toString()));
+        data.set(<span class="hljs-string">"deviceID"</span>, deviceEdit.getText().toString());
+        data.set(<span class="hljs-string">"time"</span>, System.currentTimeMillis());
+        KiiACL dataACL = data.acl();
+        dataACL.putACLEntry(<span class="hljs-keyword">new</span> KiiACLEntry(KiiAnyAuthenticatedUser.create(),
+          KiiACL.ObjectAction.READ_EXISTING_OBJECT, <span class="hljs-keyword">true</span>));
+        dataACL.save(<span class="hljs-keyword">new</span> KiiACLCallBack(){
+          <span class="hljs-annotation">@Override</span>
+          <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSaveCompleted</span>(<span class="hljs-keyword">int</span> token, KiiACL acl, Exception exception) {
+            <span class="hljs-comment">//TODO</span>
+          }
+        });
+        data.save(<span class="hljs-keyword">new</span> KiiObjectCallBack() {
+          <span class="hljs-annotation">@Override</span>
+          <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSaveCompleted</span>(<span class="hljs-keyword">int</span> token, KiiObject object,
+            Exception exception) {
+            <span class="hljs-comment">//TODO</span>
+          }
+        });
+      } 
+      <span class="hljs-keyword">catch</span> (Exception e) {
+        <span class="hljs-comment">//TODO    </span>
+      }
+      <span class="hljs-keyword">break</span>;
+  }
+}
+</code></pre><p>As explained in the previous section, there is a multiple to multiple relationship between users and devices. It is very straight forward to retrieve the uploaded data of a user from front end app, as the data from the same user are stored in the same User Scope Bucket. However, it would be very inefficient to retrieve data of a certain device because the data might be in any bucket; and the front end app has to loop through all the buckets to find the corresponding data. Threrefore, each time a user uploads his data onto his user scope bucket, the device-user mapping needs to be maintained in an <strong>App Scope Bucket</strong>, so that the front end app can easily track the certain buckets that contain the data of a device.</p><p>Given the username, deviceID, and app admin, the server extension function is shown below:</p><pre><code class="javascript hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;javascript&quot;&gt;function maintainRel(user, deviceID, admin, done, log) {
+  //get app scope bucket
+  var relation = admin.bucketWithName(&quot;UserDeviceRelation&quot;);
+  //create query with clause
+  var idEq = KiiClause.equals(&quot;userName&quot;, user.getUsername());
+  var devEq = KiiClause.equals(&quot;deviceID&quot;, deviceID);
+  var clause = KiiClause.and(idEq, devEq);
+  var query = KiiQuery.queryWithClause(clause);
+
+  relation.executeQuery(query, {
+    success: function (queryPerformed, resultSet, nextQuery) {
+      //if the mapping is not found, then add it
+      if (resultSet.length == 0) {
+        var rel = relation.createObject();
+        rel.set(&quot;deviceID&quot;, deviceID);
+        rel.set(&quot;userID&quot;, user.getUUID());
+        rel.set(&quot;userName&quot;, user.getUsername());
+        rel.save({
+          success: function (obj) {
+            recordLog(obj, &quot;save rel success&quot;, done, log);
+          },
+          failure: function (obj, errorString) {
+            recordLog(errorString, &quot;save rel fail&quot;, done, log);
+          }
+        });
+      } else {
+        recordLog(&quot;every ok,nothing need to do&quot;, &quot;finish&quot;, done, log);
+      }
+    },
+    failure: function (queryPerformed, anErrorString) {
+      recordLog(anErrorString, &quot;query rel fail&quot;, done, log);
+    }
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">maintainRel</span><span class="hljs-params">(user, deviceID, admin, done, log)</span> </span>{
+  <span class="hljs-comment">//get app scope bucket</span>
+  <span class="hljs-keyword">var</span> relation = admin.bucketWithName(<span class="hljs-string">"UserDeviceRelation"</span>);
+  <span class="hljs-comment">//create query with clause</span>
+  <span class="hljs-keyword">var</span> idEq = KiiClause.equals(<span class="hljs-string">"userName"</span>, user.getUsername());
+  <span class="hljs-keyword">var</span> devEq = KiiClause.equals(<span class="hljs-string">"deviceID"</span>, deviceID);
+  <span class="hljs-keyword">var</span> clause = KiiClause.and(idEq, devEq);
+  <span class="hljs-keyword">var</span> query = KiiQuery.queryWithClause(clause);
+
+  relation.executeQuery(query, {
+    success: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(queryPerformed, resultSet, nextQuery)</span> </span>{
+      <span class="hljs-comment">//if the mapping is not found, then add it</span>
+      <span class="hljs-keyword">if</span> (resultSet.length == <span class="hljs-number">0</span>) {
+        <span class="hljs-keyword">var</span> rel = relation.createObject();
+        rel.set(<span class="hljs-string">"deviceID"</span>, deviceID);
+        rel.set(<span class="hljs-string">"userID"</span>, user.getUUID());
+        rel.set(<span class="hljs-string">"userName"</span>, user.getUsername());
+        rel.save({
+          success: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(obj)</span> </span>{
+            recordLog(obj, <span class="hljs-string">"save rel success"</span>, done, log);
+          },
+          failure: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(obj, errorString)</span> </span>{
+            recordLog(errorString, <span class="hljs-string">"save rel fail"</span>, done, log);
+          }
+        });
+      } <span class="hljs-keyword">else</span> {
+        recordLog(<span class="hljs-string">"every ok,nothing need to do"</span>, <span class="hljs-string">"finish"</span>, done, log);
+      }
+    },
+    failure: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(queryPerformed, anErrorString)</span> </span>{
+      recordLog(anErrorString, <span class="hljs-string">"query rel fail"</span>, done, log);
+    }
+  });
+}
+</code></pre><p>In addition, we would like to do something else on this trigger. We would like our users to be able to see some analytics in dimention of time.(e.g. users can see the average temperature near him every day/week/month) So the uploaded data needs to be modified by adding extra time attributes: <code>dayNo</code>,<code>weekNo</code> and <code>monthNo</code> for <a href="http://documentation.kii.com/en/guides/android/managing-analytics/flex-analytics/analyze-application-data/">App Data Analytics</a> setup. Please note that Analytics are essentially MapReduce calculations run periodically, so the analytics result can be retrieved directy without any front end calculation. It is both network and power efficient. The server extension for uploaded data modification is shown below:</p><pre><code class="javascript hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;javascript&quot;&gt;function modifyRecord(param, context, done) {
+  //get app admin and object
+  var admin = context.getAppAdminContext();
+  var obj = KiiObject.objectWithURI(param.uri);
+
+  KiiUser.authenticateWithToken(context.getAccessToken(), {
+    success: function (theUser) {
+      obj.refresh({
+        success: function (theObj) {
+          //set dayno, weekno, monthno
+          var time = new Date(theObj.time);
+          var dayNum = Math.round(time / (1000 * 60 * 60 * 24) );
+          var weekNo = Math.round(dayNum / 7);
+          var month = time.getMonth() + time.getFullYear() * 12;
+          theObj.set(&quot;weekno&quot;, weekNo);
+          theObj.set(&quot;monthno&quot;, month);
+          theObj.set(&quot;dayno&quot;,dayNum);          
+          //set a &quot;username&quot; attribute for analytics
+                    theObj.set(&quot;username&quot;,theUser.getUsername());
+          theObj.save({
+            success: function (theObj) {
+              //set the object to be readable by other authenticate users
+              var objACL = KiiACLEntry.entryWithSubject(new KiiAnyAuthenticatedUser(), 
+                KiiACLAction.KiiACLObjectActionRead);
+              var acl = theObject.objectACL();
+              acl.putACLEntry(objACL);
+              acl.save({
+                success: function (theACL) {
+                  var deviceID = theObj.get(&quot;deviceID&quot;);
+                  //this is where the above function is used
+                  maintainRel(theUser, deviceID, admin, done, log);
+                }, failure: function (theACL, errorString) { /*TODO*/ }});},
+            failure: function (theObj, errorString) { /*TODO*/ }});},
+        failure: function (theObject, anErrorString) { /*TODO*/ }});},
+    failure: function (theUser, error) { /*TODO*/
+    }
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">modifyRecord</span><span class="hljs-params">(param, context, done)</span> </span>{
+  <span class="hljs-comment">//get app admin and object</span>
+  <span class="hljs-keyword">var</span> admin = context.getAppAdminContext();
+  <span class="hljs-keyword">var</span> obj = KiiObject.objectWithURI(param.uri);
+
+  KiiUser.authenticateWithToken(context.getAccessToken(), {
+    success: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(theUser)</span> </span>{
+      obj.refresh({
+        success: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(theObj)</span> </span>{
+          <span class="hljs-comment">//set dayno, weekno, monthno</span>
+          <span class="hljs-keyword">var</span> time = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(theObj.time);
+          <span class="hljs-keyword">var</span> dayNum = <span class="hljs-built_in">Math</span>.round(time / (<span class="hljs-number">1000</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">24</span>) );
+          <span class="hljs-keyword">var</span> weekNo = <span class="hljs-built_in">Math</span>.round(dayNum / <span class="hljs-number">7</span>);
+          <span class="hljs-keyword">var</span> month = time.getMonth() + time.getFullYear() * <span class="hljs-number">12</span>;
+          theObj.set(<span class="hljs-string">"weekno"</span>, weekNo);
+          theObj.set(<span class="hljs-string">"monthno"</span>, month);
+          theObj.set(<span class="hljs-string">"dayno"</span>,dayNum);          
+          <span class="hljs-comment">//set a "username" attribute for analytics</span>
+                    theObj.set(<span class="hljs-string">"username"</span>,theUser.getUsername());
+          theObj.save({
+            success: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(theObj)</span> </span>{
+              <span class="hljs-comment">//set the object to be readable by other authenticate users</span>
+              <span class="hljs-keyword">var</span> objACL = KiiACLEntry.entryWithSubject(<span class="hljs-keyword">new</span> KiiAnyAuthenticatedUser(), 
+                KiiACLAction.KiiACLObjectActionRead);
+              <span class="hljs-keyword">var</span> acl = theObject.objectACL();
+              acl.putACLEntry(objACL);
+              acl.save({
+                success: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(theACL)</span> </span>{
+                  <span class="hljs-keyword">var</span> deviceID = theObj.get(<span class="hljs-string">"deviceID"</span>);
+                  <span class="hljs-comment">//this is where the above function is used</span>
+                  maintainRel(theUser, deviceID, admin, done, log);
+                }, failure: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(theACL, errorString)</span> </span>{ <span class="hljs-comment">/*TODO*/</span> }});},
+            failure: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(theObj, errorString)</span> </span>{ <span class="hljs-comment">/*TODO*/</span> }});},
+        failure: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(theObject, anErrorString)</span> </span>{ <span class="hljs-comment">/*TODO*/</span> }});},
+    failure: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(theUser, error)</span> </span>{ <span class="hljs-comment">/*TODO*/</span>
+    }
+  });
+}
+</code></pre><p>Finally, the server extension functions will be executed upon this <strong>Single</strong> Hook file:</p><pre><code data-origin="&lt;pre&gt;&lt;code&gt;{
+  &quot;kiicloud://users/*/buckets/wdDataRecord&quot;:[
+    {
+      &quot;when&quot;:&quot;DATA_OBJECT_CREATED&quot;,
+      &quot;what&quot;:&quot;EXECUTE_SERVER_CODE&quot;,
+      &quot;endpoint&quot;:&quot;modifyRecord&quot;
+    }
+  ],
+  &quot;kiicloud://users&quot;: [
+    {
+      &quot;when&quot;: &quot;USER_CREATED&quot;,
+      &quot;what&quot;: &quot;EXECUTE_SERVER_CODE&quot;,
+      &quot;endpoint&quot;: &quot;modifyBucketACL&quot;
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;">{
+  "kiicloud://users/*/buckets/wdDataRecord":[
+    {
+      "when":"DATA_OBJECT_CREATED",
+      "what":"EXECUTE_SERVER_CODE",
+      "endpoint":"modifyRecord"
+    }
+  ],
+  "kiicloud://users": [
+    {
+      "when": "USER_CREATED",
+      "what": "EXECUTE_SERVER_CODE",
+      "endpoint": "modifyBucketACL"
+    }
+  ]
+}
+</code></pre><p>Please note that only one server code file with one hook file can be active at a time, so please put the above three functions in one Js file for <a href="http://documentation.kii.com/en/guides/serverextension/managing_servercode/#deploy">deployment</a>.</p><h3 id="data-retriving"><a name="data-retriving" href="#data-retriving"></a>Data Retriving</h3><p>With the help of Kii Cloud SDK, retrieving raw data from Kii Cloud server is as easy as uploading. Following is a demo showing this in Android:</p><pre><code class="java hljs" data-origin="&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;@Override
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setTitle(R.string.all_my_data);
+  setContentView(R.layout.activity_all_data);
+  //create a new query, you can certainly add clause on it if you want
+  KiiQuery all_query = new KiiQuery();
+  //get the user scope bucket
+  KiiBucket bucket = KiiUser.getCurrentUser().bucket(&quot;wdDataRecord&quot;);
+  bucket.query(new KiiQueryCallBack&amp;lt;KiiObject&amp;gt;() {
+    @Override
+    public void onQueryCompleted(int token, KiiQueryResult&amp;lt;KiiObject&amp;gt; result,
+      Exception exception) {
+      //TODO
+    }
+  }, all_query);
+}
+&lt;/code&gt;&lt;/pre&gt;"><span class="hljs-annotation">@Override</span>
+<span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span>(Bundle savedInstanceState) {
+  <span class="hljs-keyword">super</span>.onCreate(savedInstanceState);
+  setTitle(R.string.all_my_data);
+  setContentView(R.layout.activity_all_data);
+  <span class="hljs-comment">//create a new query, you can certainly add clause on it if you want</span>
+  KiiQuery all_query = <span class="hljs-keyword">new</span> KiiQuery();
+  <span class="hljs-comment">//get the user scope bucket</span>
+  KiiBucket bucket = KiiUser.getCurrentUser().bucket(<span class="hljs-string">"wdDataRecord"</span>);
+  bucket.query(<span class="hljs-keyword">new</span> KiiQueryCallBack&lt;KiiObject&gt;() {
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onQueryCompleted</span>(<span class="hljs-keyword">int</span> token, KiiQueryResult&lt;KiiObject&gt; result,
+      Exception exception) {
+      <span class="hljs-comment">//TODO</span>
+    }
+  }, all_query);
+}
+</code></pre><p>Note that this demo retrieved all the raw data from the bucket <code>wdDataRecord</code>. <strong>KiiClause</strong> can be added to the <code>KiiQuery</code> if you need more specific queries. For more information on complex query, please click <a href="http://documentation.kii.com/en/guides/android/managing-data/object-storages/querying/">HERE</a>.</p><h3 id="data-analysis"><a name="data-analysis" href="#data-analysis"></a>Data Analysis</h3><p><img src="https://raw.githubusercontent.com/leonardean/ImgUpload/master/B.png" alt="kii cloud"><br>Data Analytics is one of the most valuable features of Kii Cloud service. There are two types of Analytics:</p><ul>
+<li><a href="http://documentation.kii.com/en/guides/android/managing-analytics/basic-analytics/">Basic Analytics</a> with general application analytics with predefined metrics.</li>
+<li><a href="http://documentation.kii.com/en/guides/android/managing-analytics/flex-analytics/">Flex Analytics</a> with flexible application analytics with customizable metrics. Flex Analytics contains:<ul>
+<li><a href="http://documentation.kii.com/en/guides/android/managing-analytics/flex-analytics/analyze-application-data/">App Data Analytics</a> that analyse object data created by your application. You can use any stored key-values for defining your custom metrics.</li>
+<li><a href="http://documentation.kii.com/en/guides/android/managing-analytics/flex-analytics/analyze-event-data/">Event Data Analytics</a> that analyse data thrown by your application besides application data. Kii Analytics provides you a feature to throw such event data with arbitrary key-values.</li>
+</ul>
+</li>
+</ul><p>In this application, we are going to use App Data Analytics to get the average temperature of users by username/day/week/month. First of all, there are several steps to setup an App Data Analytics in the <strong>Developer Portal</strong>:</p><ol>
+<li>Sign in to the Developer Portal and go to <strong>Analytics</strong> section page</li>
+<li>Switch to <strong>Config</strong> tab and Click on button <strong>Add</strong> to create a new aggregation rule.</li>
+<li>Select <strong>App Data</strong> and click on <strong>Select a conversion rule</strong>.</li>
+<li>Since you do not have a conversion rule, you will neet to create one first. Fill in the space and create a conversation rule as below:<br><img src="https://raw.githubusercontent.com/leonardean/ImgUpload/master/conversation%20create.png" alt="conversation rule"></li>
+<li>save the conversation rule and set the Analytics as below:<br><img src="https://raw.githubusercontent.com/leonardean/ImgUpload/master/analytics%20set.png" alt="analytics set"><br>Save and Activate the Aggregation rule, it will be ready to use. You will get an <strong>ID</strong> for the Aggregation Rule after activation. The ID will be used in the front end app to retrieve analytics data.</li>
+</ol><p>Please note that analytics are calculated once every 24 hours on Kii Cloud. Therefore, it is likely that you do not have an instant view of the metrics after you just created an Aggregation Rule. After some time, you will be able to see the corresponding metrics as below:</p><p><img src="https://raw.githubusercontent.com/leonardean/ImgUpload/master/analytics%20view.png" alt="analytics view"></p><h3 id="more"><a name="more" href="#more"></a>More</h3>
+
+<footer style="position:fixed; font-size:.8em; text-align:right; bottom:0px; margin-left:-25px; height:20px; width:100%;">generated by <a href="http://pad.haroopress.com" target="_blank">haroopad</a></footer>
+</body>
+</html>
