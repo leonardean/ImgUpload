@@ -1,4 +1,4 @@
-#How Kii Cloud helps IoT products be on fire
+#How Kii Cloud Brightens IoT Devices
 [TOC]
 ###Abstract
 ![concept of iot](https://raw.githubusercontent.com/leonardean/ImgUpload/master/internet-of-things-more-devices-than-people.png)
