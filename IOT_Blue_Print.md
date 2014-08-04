@@ -6,6 +6,7 @@ Trends show that the Internet of Things(IoT) has great potential to enhance peop
 
 [Kii Cloud](http://cn.kii.com/)([English Website](http://en.kii.com/)) is a **Mobile Back-end as a Service(MBaaS)** that offers developers an easy way to build a full-stack mobile backend to their apps in minutes, with carrier-grade technology, plus analytics to help to succeed. Kii Cloud can be used on almost every mobile platform and covers the most demanded functionality for developers to **freely** tailor their back end business logic. This article shows a typical story of how Kii Cloud can be used to help an IoT device to ease its life and be more productive.
 ###Application Scenario
+####General Scenario
 Suppose that we have a wearable device with sensors to detect environmental status (e.g. tmperature, UV index, humidity) around its wearer. It can periodically transmit detected data via **BLE**(Bluetooth Low Energy) or **IR**(Infrared) to a receiver such as a central control or a mobile phone. Our goal is to make the device act as not only a real time environment tracker (it already seem to be), but also a data generator/provider, so that its data can be consumed to produce more **added value**. Examples of data consumption could be:
 * multi-dimentional data viewing
 * data analysis
@@ -15,6 +16,7 @@ The goal can be acheived with the help of Kii Cloud as a back-end cloud service.
 
 ![scenario](https://raw.githubusercontent.com/leonardean/ImgUpload/master/device%20to%20cloud.png)
 
+####Technical Terminology
 Let's take a technical view at how Kii Cloud can be used in this application. Please have a look at some involved terminologies of  Kii Cloud if you are new to Kii Cloud. (You do not need a thorough understanding of these at this moment as they will be explained in later contents)
 * It is very easy to add a Kii Cloud back end service for you app. Register and log in the [Developer Portal](https://developer.kii.com/?locale=en), and then click on **Create App** to start a new app back end service. During development, this is probably where you spend most of your time besides front end app programming. Find your **access keys** and keep in mind that they are important and need to be kept safely.
 * [Kii Cloud SDK](http://documentation.kii.com/en/starts/cloudsdk/) provides the basic and most demanded functions for leveraging Kii Cloud. They cover almost every mobile platform: Android, iOS, Unity, Javascript, and Terminal Tools. For more advanced use of Kii Cloud, [REST](http://documentation.kii.com/en/guides/rest/) and [Server Extension](http://documentation.kii.com/en/guides/serverextension/) may need to be used. In this application, we will have a taste of these two as well.
@@ -22,27 +24,52 @@ Let's take a technical view at how Kii Cloud can be used in this application. Pl
 * When using Kii Cloud SDK, data is store in the form of [KiiObject](http://documentation.kii.com/en/starts/cloudsdk/managing-data/object-storage/). Internally, they are store as **JSON Key-Value** pairs.
 * Kii Cloud provides flexible [Flex Analytics](http://documentation.kii.com/en/guides/android/managing-analytics/) that enables you to learn more about how your app is going on (**App Data Analytics**) and user behavior(**Event Analytics**). In addition, the analytics are also accessible from the front end app so that your users can get designated analysis as well.
 
-###Kii SDK Initialization
-In order to use Kii Cloud SDK features in the front end app, the SDK needs to be firstly initialized. Following demo shows the initialization in Android:
-```java
-package com.kii.wearable.demo;
+###Back End Design
+####Bucket Design
+First of all, let's talk about data storage in this application. As mentioned above, envionmental data are going to be transmitted from the wearable device to a mobile phone, and the phone will send the data into **buckets** of Kii Cloud. There are three types of buckets with different [Scopes](http://documentation.kii.com/en/starts/cloudsdk/cloudoverview/bucketscope/):
 
-import android.app.Application;
-import com.kii.cloud.analytics.KiiAnalytics;
-import com.kii.cloud.storage.Kii;
+| Scope | Who can create a new Bucket? |Who can create a new data in the Bucket?|Who can query for data in the Bucket?|Who can drop the Bucket?|Who can add ACL entries?|
+|--------|--------|--------|--------|--------|--------|
+|Application|- Any authenticated users|- Any authenticated users|- Any authenticated users<br>- Anonymous users|-  Any authenticated users| N/A (Only an application admin)|
+|Group|- All group members<br>- The group creator|- All group members<br>- The group creator<br>- The bucket creator|- All group members<br>- The group creator<br>- The bucket creator|- The group creator<br>- The bucket creator|- The group creator|
+|User|- The user|- The user<br>- The bucket creator|- The user<br>- The bucket creator|- The user<br>- The bucket creator|- The user|
+In this application, User scope bucket will be used for environmental data storage so that each user will use his/her own bucket to keep the data private.
 
-public class DemoApplication extends Application {
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    Kii.initialize(Constants.APP_ID, Constants.APP_KEY, Kii.Site.CN);
-    KiiAnalytics.initialize(this, Constants.APP_ID, Constants.APP_KEY, KiiAnalytics.Site.CN);
-  }
-}
+Practically, one device might be shared to be used by multiple users (apps). Also, one app can map to multiple wearable devices. It is forseeable that a user might want to retrieve the data sent by himself and also by his device. It is intuitively easy to retrieve data from a user's own User Scope bucket but not easy to get data sent by a certain device because we have no idea where the data is (could be in any bucket). Looping through all the user scope bucket is neither computational nor time efficient.
+
+Therefore, we need to use another bucket to store the **user-device mapping relationship** so that when querying data by a certain device, we know where to find. The bucket needs to be accessible by any autheticated user, so we use an **App Scope** Bucket to do the job. To summarize, we need to use two types of buckets in this application: 
+* A User Scope Bucket for each user to storage environmental data.
+* An App Scope Bucket to maintain user-device mapping relationship.
+
+####Server Extension Functions
+A part from bucket design, we also need to design some server extension functions to fulfil the business logics of this application. A server extension function can do whatever that is achievable in front end app, but instead of running on client side, it runs on the server side. A server extension function can be run with function call from client side; and with the help of a **Server Hook **, it can also be run automatically based on schedule or triggered by server events such as user registration, data CRUD, etc.
+
+In the above sub-section, we explained the need to retrieve environmental data by user and device. From the table, we know that if a bucket is User Scope bucket, only the corresponding user can query the data in the bucket. Therefore, it would be impossible to query all the environmental data by device when the device has been used by multiple users, because the data are split into multiple users' User Scope buckets and one can only query from his own User Scope bucket. Here we will need to use a server extension function to make the business logic technically feasible by modifying the ACL of one's user scope bucket(**execute server extension function**) when the user has just registered(**triggered by server event**).
+
+Besides bucket ACL modification, we also need a function to maintain the user-device mapping relationship as Key-Value pairs in an App Scope bucket. A good time to execute the function is when there is environmental data record uploaded to the server. What the function does would be:
+* Check if the device-user pair has already been stored.
+* If so, do nothing.
+* If not, store the device-user pair in the App Scope Bucket.
+
+In addition, we would like our users to be able to see some data analytics in the dimensions of different time interval(e.g. how the temperature changes in different weeks). Setting the wanted data field and aggregation function, Kii Cloud can do the analytics in dimension of day by default(we will cover how later). However, to get analytics in demension of week/month/quarter/year, we will have to download the existing analytics data and do calculations on client side in the front end app. Doing so is neither computational nor time efficient. Therefore, we can use a server extension function that adds custom fields (day number, week number, month number) to the uploaded data when there occurs a data upload on the server, so that the added fields can be used as custom dimension when doing analytics.
+
+Since the functions are executed on server side, they need to be deployed to Kii Cloud. When using Server Hook, two files need to be deployed:
+* A Javascript file containing single or multiple server extension functions.
+* A Server Hook Config file containing information on when the functions are executed.
+
+To deploy the two files, please follow this [link](http://documentation.kii.com/en/guides/commandlinetools/#installation) to install command line tool first; and then execute the following command in terminal:
 ```
-
+node bin/kii-servercode.js deploy-file \
+  --file <js_function_file> \
+  --site us \
+  --app-id <your_app_id> \
+  --app-key <your_app_key> \
+  --client-id <your_client_id> \
+  --client-secret <your_client_secret> \
+  --hook-config <hook_file>
+```
 ###User Registration
-Device pairing and user registration is the first step of a user using the product. User registration and login can be quite straight forward in front end app using Kii Cloud SDK. The following demo shows the implementation in Android:
+User registration is the first step of a user using the product. User registration and login can be quite straight forward in front end app using Kii Cloud SDK. The following demo shows the implementation in Android:
 ```java
 @Override
 public void onClick(View view) {
@@ -62,7 +89,7 @@ public void onClick(View view) {
 ```
 In `callback` function, user **Access Token** can be locally stored and used for faster login next time. For more information on auto access token login, please click [HERE](http://documentation.kii.com/en/starts/cloudsdk/managing-users/accesstoken/).
 
-Practically, one device might be shared to be used by multiple users (apps). Also, one app can map to multiple wearable devices. In order to make sure that correct data can be retrieved by user and by device, a server extension function that modifies the ACL of each newly registrated user's **User Scope Bucket** used for data storage needs to be executed when a user is created. A [Hook](http://documentation.kii.com/en/guides/serverextension/managing_servercode/#serverhook) for **Server Triggered Execution** is therefore used.
+In order to make sure that correct data can be retrieved by user and by device as previously mentioned, a server extension function that modifies the ACL of each newly registrated user's **User Scope Bucket** (used for environmental data storage) needs to be executed when a user is created. A [Hook](http://documentation.kii.com/en/guides/serverextension/managing_servercode/#serverhook) for **Server Triggered Execution** is therefore used.
 ```
 {
   "kiicloud://users": [
@@ -107,6 +134,7 @@ function modifyBucketACL(param, context, done) {
 ```
 For more information on server code writing, managing, and executing, please click [HERE](http://documentation.kii.com/en/guides/serverextension/).
 ###Data sending
+####Environmental Data Upload
 Since data is sent in the form of Key-Value pairs, a typical piece of data uploaded to the bucket `wdDataRecord` would be like:
 ```
 {
@@ -148,14 +176,15 @@ public void onClick(View view) {
             //TODO
           }
         });
-      } 
+      }
       catch (Exception e) {
-        //TODO    
+        //TODO
       }
       break;
   }
 }
 ```
+####User-Device Mapping
 As explained in the previous section, there is a multiple to multiple relationship between users and devices. It is very straight forward to retrieve the uploaded data of a user from front end app, as the data from the same user are stored in the same User Scope Bucket. However, it would be very inefficient to retrieve data of a certain device because the data might be in any bucket; and the front end app has to loop through all the buckets to find the corresponding data. Threrefore, each time a user uploads his data onto his user scope bucket, the device-user mapping needs to be maintained in an **App Scope Bucket**, so that the front end app can easily track the certain buckets that contain the data of a device.
 
 Given the username, deviceID, and app admin, the server extension function is shown below:
@@ -195,6 +224,7 @@ function maintainRel(user, deviceID, admin, done, log) {
   });
 }
 ```
+####Data Record Modification
 In addition, we would like to do something else on this trigger. We would like our users to be able to see some analytics in dimention of time.(e.g. users can see the average temperature near him every day/week/month) So the uploaded data needs to be modified by adding extra time attributes: `dayNo`,`weekNo` and `monthNo` for [App Data Analytics](http://documentation.kii.com/en/guides/android/managing-analytics/flex-analytics/analyze-application-data/) setup. Please note that Analytics are essentially MapReduce calculations run periodically, so the analytics result can be retrieved directy without any front end calculation. It is both network and power efficient. The server extension for uploaded data modification is shown below:
 ```javascript
 function modifyRecord(param, context, done) {
@@ -256,29 +286,8 @@ Finally, the server extension functions will be executed upon this **Single** Ho
 }
 ```
 Please note that only one server code file with one hook file can be active at a time, so please put the above three functions in one Js file for [deployment](http://documentation.kii.com/en/guides/serverextension/managing_servercode/#deploy).
-###Data Retriving
-With the help of Kii Cloud SDK, retrieving raw data from Kii Cloud server is as easy as uploading. Following is a demo showing this in Android:
-```java
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-  super.onCreate(savedInstanceState);
-  setTitle(R.string.all_my_data);
-  setContentView(R.layout.activity_all_data);
-  //create a new query, you can certainly add clause on it if you want
-  KiiQuery all_query = new KiiQuery();
-  //get the user scope bucket
-  KiiBucket bucket = KiiUser.getCurrentUser().bucket("wdDataRecord");
-  bucket.query(new KiiQueryCallBack<KiiObject>() {
-    @Override
-    public void onQueryCompleted(int token, KiiQueryResult<KiiObject> result,
-      Exception exception) {
-      //TODO
-    }
-  }, all_query);
-}
-```
-Note that this demo retrieved all the raw data from the bucket `wdDataRecord`. **KiiClause** can be added to the `KiiQuery` if you need more specific queries. For more information on complex query, please click [HERE](http://documentation.kii.com/en/guides/android/managing-data/object-storages/querying/).
 ###Data Analysis
+####Analytics Setup
 ![kii cloud](https://raw.githubusercontent.com/leonardean/ImgUpload/master/B.png)
 Data Analytics is one of the most valuable features of Kii Cloud service. There are two types of Analytics:
 * [Basic Analytics](http://documentation.kii.com/en/guides/android/managing-analytics/basic-analytics/) with general application analytics with predefined metrics.
@@ -303,12 +312,13 @@ Please note that analytics are calculated once every 24 hours on Kii Cloud. Ther
 The metrics page contains two charts and one table. The line graph on the top shows the temperature values of different users by day. The bar chart at the bottom right gives a more direct view of the value comparison between the three users. Dimention can be switched by clicking on any of the four pre-set fields so that the chart can show temperature values of different devices/weeks/months.
 
 In addition to flexible dimention switch, you can also add filters for more detailed information. In this case, the temperature values are filtered by deviceID `device1`. Therefore, only users who have used the device are shown on the graph. The table shows the detailed temperature values of each username/deviceID with comparison to total average. Clicking on any of the record in the table can toggle on/off the corresponding data display in the two charts.
-
+####Analytics Data Retrieval
 The metrics on the Developer Portal is only for yourself as the developer of the app. If you would like your user to see the analytics data in the front end app, the corresponding [REST API](http://documentation.kii.com/rest/#analytics_management-retrieve_flex_analytics_results)(Tip: please do click on the API link on the doc page for detail expansion) will be needed. The following demo shows how to do it in Javascript:
 ```javascript
-function lala(){
+function doAnalysis(){
   var ajaxData = {
     type: "GET",
+    //the sub-domain varies for different server region, e.g. api-cn2 us used for China server
     url: "https://api-cn2.kii.com/api/apps/" + Kii.getAppID()+ "/analytics/120/data?" +
       "group=username&" +
       "filter001.name=deviceID&" +
@@ -331,7 +341,35 @@ The above demo retrieves the analytics data with:
 
 Please note that multiple filters can be added by appending `filterN.name` and `filterN.value` (`N` is an integer) to the query string. The retrieved data can be used in whatever ways in the front end app to satisfy your users.
 
-###More
+###Raw Data Retriving
+With the help of Kii Cloud SDK, retrieving raw data from Kii Cloud server is as easy as uploading. Following is a demo showing this in Android:
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setTitle(R.string.all_my_data);
+  setContentView(R.layout.activity_all_data);
+  //create a new query, you can certainly add clause on it if you want
+  KiiQuery all_query = new KiiQuery();
+  //get the user scope bucket
+  KiiBucket bucket = KiiUser.getCurrentUser().bucket("wdDataRecord");
+  bucket.query(new KiiQueryCallBack<KiiObject>() {
+    @Override
+    public void onQueryCompleted(int token, KiiQueryResult<KiiObject> result,
+      Exception exception) {
+      //TODO
+    }
+  }, all_query);
+}
+```
+Note that this demo retrieved all the raw data from the bucket `wdDataRecord`. **KiiClause** can be added to the `KiiQuery` if you need more specific queries. For more information on complex query, please click [HERE](http://documentation.kii.com/en/guides/android/managing-data/object-storages/querying/).
 
-This article demonstrated how Kii Cloud can be used as a back end service in typicle IoT case. With **Kii SDK** and **Developer Portal**, developers can easily build and manage a back end service for their front end apps without writing a single line for back end server except Hooks and Server extension functions. The stability, reliability and scalibility of Kii Cloud service guarantee that app developers can focus on the user interface and user experience of their front end apps
+###More
+This article demonstrated how Kii Cloud can be used as a back end service in typicle IoT case. With **Kii SDK** and **Developer Portal**, developers can easily build and manage a back end service for their front end apps without writing a single line for back end server except Hooks and Server extension functions. The stability, reliability and scalibility of Kii Cloud service guarantee that app developers can focus on the user interface and user experience of their front end apps without worrying about back end development and maintenance.
+
+As a front end app developer no matter in Android, iOS, Unity, or Javascript, you probably worry about the security of your application. Since the specification of the Kii Cloud is open, any attackers who know your application's access key (i.e. App ID and App Key) can imitate your application and access the Kii Cloud. This, however, does not mean they can exploit your users' data. As long as the user data are protected with the proper **access control**, they are safe even if the access keys are leaked. On the other hand, the application **admin** credentials (i.e. Client ID and Client Secret) must not be leaked at any cost. Any attackers who get these credentials will gain a full access to all user data. Please click [HERE](http://documentation.kii.com/en/starts/cloudsdk/hint/security/) for tips on how to keep your application secured.
+
+Finally, all the demo codes shown in this artical can be found in [HERE](https://github.com/leonardean/IOTDemo--Android-ServerExtension-JsFront). Please feel free to download and have go with the full source code.
+
+
 
